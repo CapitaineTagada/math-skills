@@ -14,40 +14,40 @@ import (
 func main() {
 	utils.CheckArgs()
 
-	// Lit le fichier et divise le contenu du fichier en mots
+	// Reads the file and splits the content of the file into words
 	var ints []int
 	test := utils.ReadFile(os.Args[1])
 	ttt := strings.Fields(test)
 
-	// Parcours, convertit les mots en int
+	// Iterates, converts the words to int
 	for _, v := range ttt {
 		vint, err := strconv.Atoi(v)
 		utils.CheckErr(err)
 		ints = append(ints, vint)
 	}
 
-	// On ajoute chaque entier v à la somme
+	// Adds each integer v to the sum
 	sum := 0
 	for _, v := range ints {
 		sum += v
 	}
 
-	sort.Ints(ints) // trie les slices
-	// calcul de la moyenne
+	sort.Ints(ints) // sorts the slices
+	// calculates the average
 	shared.Average = int(math.Round(float64(sum) / float64(len(ints))))
-	// calcul médiane
+	// calculates the median
 	shared.Median = int(math.Round(Median(ints)))
-	// print les résultats
+	// prints the results
 	fmt.Printf("Average: %d\n", shared.Average)
 	fmt.Printf("Median: %v\n", int(math.Round(Median(ints))))
-	// calcul de la variance, arrondit et affiche
+	// calculates the variance, rounds and displays
 	fmt.Printf("Variance: %v\n", int(math.Round(Variance(ints, float64(shared.Average)))))
-	// calcul écart type avec Sqrt
+	// calculates standard deviation with Sqrt
 	shared.Deviation = int(math.Round(math.Sqrt(float64(shared.Temp))))
 	fmt.Printf("Standard Deviation: %v\n", int(math.Round(float64(shared.Deviation))))
 }
 
-// calcul de la médiane
+// calculates the median
 func Median(ints []int) float64 {
 	sort.Ints(ints)
 	length := len(ints)
@@ -59,7 +59,7 @@ func Median(ints []int) float64 {
 	return float64(ints[length/2])
 }
 
-// calcul de la variance
+// calculates the variance
 func Variance(ints []int, average float64) float64 {
 	var sum float64
 
